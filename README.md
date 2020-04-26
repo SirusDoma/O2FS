@@ -10,12 +10,12 @@ The main idea is to add functionality to the OTwo.exe client so it able to load 
 This project is only serve as Proof of Concept and cannot be used as-is, lot of function need to be implemented in order to eliminate hardcoded variables (e.g music header, ojnlist patch, etc).
 
 ## How it works ##
-1. This project has 2 projects that generate 2 binary files: `O2MusicHook.Launcher.exe` and `O2MusicHook.dll`
+1. This work has 2 projects that generate 2 binary files: `O2MusicHook.Launcher.exe` and `O2MusicHook.dll`
 2. DLL and Launcher need to be placed under the same directory of o2jam game client. When the Launcher is executed, it will inject `O2MusicHook.dll` into the game client
 3. Once `O2MusicHook.dll` injected, it will began to hook few functions, only 2 functions that actually needed for current implementation: `ReadFile` and `GetFileSize`
 4. When hooked function attempt to open ojn that actually contain bms file, it will intercept the function
-5. The interception works by loading bms file and convert it into ojn data and then return them instead without reading the requested file
-6. File size hook is needed so the game use the output (ojn) file size instead of input (bms) file size, otherwise reading sequence can be messed up and the game may crashed.
+5. The interception works by loading bms file and it will convert it into ojn data and then return the conversion result, the original function is ignored
+6. File size hook is needed so the game will use the output (ojn) file size instead of input (bms) file size, otherwise reading sequence can be messed up and the game may crashed
 
 ## What need to be done ##
 Quite amount of effort is needed to complete this hook so it can be used for any music:
