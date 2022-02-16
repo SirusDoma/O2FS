@@ -1,32 +1,41 @@
-# O2MusicHook #
+# O2FS #
 
 - **Author**: CXO2
-- **Email**: com@cxo2.me
-- **Version**: 0.0.1
+- **Version**: 0.7.0
 
-Experiment artifacts of O2Jam music parser hook. ([Demo](https://www.facebook.com/CXO2JAM/videos/3249496448417106/))  
-The main idea is to add functionality to the OTwo.exe client so it able to load BMS music file.  
+This program provides a customizable FileSystem that enables O2Jam Client (`OTwo.exe`) to load various file formats from various source.  
+For an instance: Loading `BMS` file from Network directly.  
 
-This project is only serve as Proof of Concept and cannot be used as-is, lot of function need to be implemented in order to eliminate hardcoded variables (e.g music header, ojnlist patch, etc).
+Please note that extension is **NOT** limited to music files.
+As such, it is possible to implement a custom FileSystem for image files.
 
-## How it works ##
-1. This work has 2 projects that generate 2 binary files: `O2MusicHook.Launcher.exe` and `O2MusicHook.dll`
-2. DLL and Launcher need to be placed under the same directory of o2jam game client. When the Launcher is executed, it will inject `O2MusicHook.dll` into the game client
-3. Once `O2MusicHook.dll` injected, it will began to hook few functions, only 2 functions that actually needed for current implementation: `ReadFile` and `GetFileSize`
-4. When hooked function attempt to open ojn that actually contain bms file, it will intercept the function
-5. The interception works by loading bms file and it will convert it into ojn data and then return the conversion result, the original function is ignored
-6. File size hook is needed so the game will use the output (ojn) file size instead of input (bms) file size, otherwise reading sequence can be messed up and the game may crashed
+### Experimental Project ###
+This project is highly experimental and only serve as Proof of Concept at this stage,
+so bugs and errors are to be expected.  
 
-## What need to be done ##
-Quite amount of effort is needed to complete this hook so it can be used for any music:
-1. Proper BMS parser, OJN Writer and Chart data classes. Again, current implementation only serve as proof of concept, large amount of features are missing, even essential ones are replaced by hardcoded variables (e.g BPM)
-2. Synchronization between output OJN and OJNList, these two headers must match or else the game won't load the conversion output. There's few ways to do this, read the source for further detail
-3. Decision to load music samples, whether it sourced from original bms music samples instead of OJM files
-4. Additional asset handling aside from music samples, for example music cover image
-5. `FindFirstFile` and `FindNextFile` need to be hooked so `.bms` files are recognized as-is
+Currently only capable to handle `BMS` format from a Disk with some features are still missing; including but not limited to: 
+Custom file extension, `OJNList.dat` and `OJM` Sync support, Note Pan and Note Volume, Multi `BMS` Difficulty.
 
-With this proven concept, it is possible to support other format than BMS files.
+## Installation ##
+1. [Download](https://github.com/SirusDoma/O2FS/releases/latest) or Build the project.
+2. Place `O2FS.Launcher.exe` and `O2FS.dll` under the same directory of O2Jam game client.
+3. Run `O2FS.Launcher.exe` with O2Jam client standard arguments (the launcher will launch `OTwo.exe` and forward the arguments).
+
+## Improvements ##
+Quite amount of effort is needed to complete this hook so it can provide flexible filesystem customization:
+1. **`Charting` data classes / structs**  
+Current design is not final and should follow O2Jam data structure as close as possible while maintaining customizability.
+2. **Image FileSystem Implementation**  
+Hooks that customize FileSystem for Image files such as `OPI` and `OPA` files.
+3. **Synchronization Files**  
+Headers inside `OJNList.dat` and Samples inside `OJM` need to be match or else the game may fail to load the conversion output.
+4. **Serializers and Deserializers**  
+Improvement for current Serializers and Deserializers, It also need a factory pattern or possibly other proper design that enable integration of new extension for other file formats.
+5. **`FindFirstFile` and `FindNextFile` Hook**  
+This will allows custom extension to be recognized as-is by the game.
+6. **DLL Extension**  
+Allows a third-party `DLL` file to be injected to the game with O2FS interface for dynamic custom FileSystem.
 
 ## License ##
 
-This is an open-sourced library licensed under the [MIT License](http://github.com/SirusDoma/O2MusicHook/blob/master/LICENSE)
+This is an open-sourced library licensed under the [MIT License](http://github.com/SirusDoma/O2FS/blob/master/LICENSE).

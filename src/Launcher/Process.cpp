@@ -1,27 +1,27 @@
-#include <O2MusicHook/Launcher/Process.hpp>
+#include <Launcher/Process.hpp>
+#include <Logger.hpp>
 
-namespace O2MusicHook::Launcher
+namespace O2FS::Launcher
 {
-    
     Process::Process(std::string moduleName) :
-        moduleName(moduleName),
-        processId(0),
-        threadId(0),
-        hProcess(0),
-        hThread(0),
-        hModule(0)
+            moduleName(moduleName),
+            processId(0),
+            threadId(0),
+            hProcess(0),
+            hThread(0),
+            hModule(0)
     {
         if (!moduleName.empty())
             GetProcessHandle();
     }
 
     Process::Process(HANDLE hProcess, HANDLE hThread, int processId, int threadId) :
-        moduleName(),
-        processId(processId),
-        threadId(threadId),
-        hProcess(hProcess),
-        hThread(hThread),
-        hModule(0)
+            moduleName(),
+            processId(processId),
+            threadId(threadId),
+            hProcess(hProcess),
+            hThread(hThread),
+            hModule(0)
     {
     }
 
@@ -44,22 +44,21 @@ namespace O2MusicHook::Launcher
         STARTUPINFO si = { sizeof(si) };
         PROCESS_INFORMATION pi;
         bool success = CreateProcess(
-            path.c_str(),
-            LPSTR(args.c_str()),
-            NULL,
-            NULL,
-            TRUE,
-            suspended ? CREATE_SUSPENDED : 0,
-            NULL,
-            NULL, // workdir, you may want to point this out to o2jam client folder to make debugging easier
-            &si,
-            &pi
+                path.c_str(),
+                const_cast<char*>(args.c_str()),
+                NULL,
+                NULL,
+                TRUE,
+                suspended ? CREATE_SUSPENDED : 0,
+                NULL,
+                NULL,
+                &si,
+                &pi
         );
 
         if (!success)
         {
-            std::fprintf(stderr, "O2MUSICHOK: Failed to create process\n");
-            DWORD err = GetLastError();
+            Logger::Write("O2FS: Failed to create process\n");
             return Process("");
         }
 
@@ -98,9 +97,9 @@ namespace O2MusicHook::Launcher
                     // Process found, attempt to open process
                     processId = entry.th32ProcessID;
                     hProcess = OpenProcess(
-                        PROCESS_ALL_ACCESS,
-                        FALSE,
-                        entry.th32ProcessID
+                            PROCESS_ALL_ACCESS,
+                            FALSE,
+                            entry.th32ProcessID
                     );
 
                     break;
@@ -110,7 +109,7 @@ namespace O2MusicHook::Launcher
 
         // Check process handle
         if (!hProcess)
-            std::fprintf(stderr, "O2MUSICHOK: Failed to open process\n");
+            Logger::Write("O2FS: Failed to open process\n");
 
         return hProcess;
     }
@@ -133,7 +132,7 @@ namespace O2MusicHook::Launcher
         // Validate snapshot
         if (hThreadSnapshot == INVALID_HANDLE_VALUE)
         {
-            std::fprintf(stderr, "O2MUSICHOK: Failed to open find thread\n");
+            Logger::Write("O2FS: Failed to open find thread\n");
             return hProcess;
         }
 
@@ -147,9 +146,9 @@ namespace O2MusicHook::Launcher
                 {
                     threadId = tEntry.th32ThreadID;
                     hThread  = OpenThread(
-                        THREAD_ALL_ACCESS,
-                        FALSE,
-                        tEntry.th32ThreadID
+                            THREAD_ALL_ACCESS,
+                            FALSE,
+                            tEntry.th32ThreadID
                     );
 
                     break;
@@ -159,7 +158,7 @@ namespace O2MusicHook::Launcher
 
         // Check process handle
         if (!hThread)
-            std::fprintf(stderr, "O2MUSICHOK: Failed to locate thread handle\n");
+            Logger::Write("O2FS: Failed to locate thread handle\n");
 
         return hThread;
     }
@@ -218,7 +217,7 @@ namespace O2MusicHook::Launcher
 
         // No main module found
         if (!address)
-            std::fprintf(stderr, "O2MUSICHOK: Failed to find module.\n");
+            Logger::Write("O2FS: Failed to find module.\n");
 
         hModule = address;
         return address;
@@ -229,13 +228,13 @@ namespace O2MusicHook::Launcher
     {
         if (!hThread)
         {
-            std::fprintf(stderr, "O2MUSICHOK: No valid thread handle found\n");
+            Logger::Write("O2FS: No valid thread handle found\n");
             return false;
         }
 
         if (!ResumeThread(hThread))
         {
-            std::fprintf(stderr, "O2MUSICHOK: Failed to resume thread\n");
+            Logger::Write("O2FS: Failed to resume thread\n");
             return false;
         }
 
@@ -246,13 +245,13 @@ namespace O2MusicHook::Launcher
     {
         if (!hThread)
         {
-            std::fprintf(stderr, "O2MUSICHOK: No valid thread handle found\n");
+            Logger::Write("O2FS: No valid thread handle found\n");
             return false;
         }
 
         if (!SuspendThread(hThread))
         {
-            std::fprintf(stderr, "O2MUSICHOK: Failed to suspend thread\n");
+            Logger::Write("O2FS: Failed to suspend thread\n");
             return false;
         }
 
@@ -269,7 +268,7 @@ namespace O2MusicHook::Launcher
         // Validate process handle
         if (!hProcess)
         {
-            std::fprintf(stderr, "O2MUSICHOK: Invalid process handle.\n");
+            Logger::Write("O2FS: Invalid process handle.\n");
             return 0;
         }
 
@@ -279,7 +278,7 @@ namespace O2MusicHook::Launcher
         // Read data from target address process memory
         unsigned int result = 0;
         if (!ReadProcessMemory(hProcess, target, &result, sizeof(result), NULL))
-            std::fprintf(stderr, "O2MUSICHOK: Failed to read process memory.\n");
+            Logger::Write("O2FS: Failed to read process memory.\n");
 
         return result;
     }
@@ -289,7 +288,7 @@ namespace O2MusicHook::Launcher
         // Validate process handle
         if (!hProcess)
         {
-            std::fprintf(stderr, "O2MUSICHOK: Invalid process handle.\n");
+            Logger::Write("O2FS: Invalid process handle.\n");
             return 0;
         }
 
@@ -299,7 +298,7 @@ namespace O2MusicHook::Launcher
         // Write data to target address process memory
         SIZE_T bytesWritten = 0;
         if (!WriteProcessMemory(hProcess, target, buffer, size, &bytesWritten))
-            std::fprintf(stderr, "O2MUSICHOK: Failed to write process memory %d.\n", GetLastError());
+            Logger::Write("O2FS: Failed to write process memory %d.\n", GetLastError());
 
         return bytesWritten;
     }

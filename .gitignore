@@ -12,6 +12,7 @@
 .idea/
 
 # Build results
+[Bb]uild/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -22,8 +23,10 @@ bld/
 [Bb]in/
 [Oo]bj/
 
-# Visual Studio 2015 cache/options directory
+# IDE directory
 .vs/
+.idea/
+
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -140,7 +143,7 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
-# TODO: Un-comment the next line if you do not want to checkin 
+# TODO: Un-comment the next line if you do not want to checkin
 # your web deploy settings because they may include unencrypted
 # passwords
 #*.pubxml

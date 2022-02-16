@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x86</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{70485A38-BA8F-3664-81B0-1746D8D1504A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x86</Platform>
+    <ProjectName>O2FS</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">O2FS</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">O2FS</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\build\o2fs\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)\bin\</OutDir>
+    <IntDir>$(SolutionDir)\build\o2fs\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug";O2FS_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";O2FS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>.\extlibs\lib\detours.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x86</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>
+      </ImportLibrary>
+      <ProgramDataBaseFile>$(SolutionDir)/bin/O2FS.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";O2FS_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";O2FS_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>$(ProjectDir)\src;$(ProjectDir)\include;$(ProjectDir)\extlibs\include;$(ProjectDir)\include\Launcher;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>.\extlibs\lib\detours.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x86</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>
+      </ImportLibrary>
+      <ProgramDataBaseFile>$(SolutionDir)/bin/O2FS.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="$(ProjectDir)\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule $(SolutionDir)/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
+"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir)/build/cmake-build-debug --check-stamp-file $(SolutionDir)/build/cmake-build-debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeRCInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeCCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)\build\cmake-build-debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule $(SolutionDir)/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
+"C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\bin\cmake.exe" -S$(SolutionDir) -B$(SolutionDir)/build/cmake-build-debug --check-stamp-file $(SolutionDir)/build/cmake-build-debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCXXInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeGenericSystem.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeLanguageInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeRCInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\MSVC-C.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\Windows.cmake;C:\Program Files\JetBrains\CLion 2020.3.2\bin\cmake\win\share\cmake-3.21\Modules\Platform\WindowsPaths.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeCCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeCXXCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeRCCompiler.cmake;$(ProjectDir)\build\cmake-build-debug\CMakeFiles\3.21.1\CMakeSystem.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)\build\cmake-build-debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(ProjectDir)\src\O2FS\IO\BeMusicReader.cpp" />
+    <ClCompile Include="$(ProjectDir)\src\O2FS\IO\O2MusicWriter.cpp" />
+    <ClCompile Include="$(ProjectDir)\src\O2FS\OTwo.cpp" />
+    <ClCompile Include="$(ProjectDir)\src\O2FS\Systems\O2ImageSystem.cpp" />
+    <ClCompile Include="$(ProjectDir)\src\O2FS\Systems\O2MusicSystem.cpp" />
+    <ClCompile Include="$(ProjectDir)\src\O2FS\dllmain.cpp" />
+    <ClInclude Include="$(ProjectDir)\include\Logger.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Charting\Channel.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Charting\Chart.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Charting\Difficulty.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Charting\Event.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Charting\Genre.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\FileSystem.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\IO\BeMusicReader.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\IO\O2MusicWriter.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\OTwo.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Systems\O2ImageSystem.hpp" />
+    <ClInclude Include="$(ProjectDir)\include\O2FS\Systems\O2MusicSystem.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

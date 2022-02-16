@@ -1,0 +1,24 @@
+#ifndef O2FS_GENRE_HPP
+#define O2FS_GENRE_HPP
+
+#include <string>
+
+namespace O2FS
+{
+    enum class Genre : int
+    {
+        Ballad      = 0,
+        Rock        = 1,
+        Dance       = 2,
+        Techno      = 3,
+        HipHop      = 4,
+        Soul        = 5,
+        Jazz        = 6,
+        Funk        = 7,
+        Classical   = 8,
+        Traditional = 9,
+        Etc         = 10
+    };
+}
+
+#endif //O2FS_GENRE_HPP

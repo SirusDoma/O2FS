@@ -1,13 +1,16 @@
 
 *------------------- HEADER FIELD
 #PLAYER 1
-#GENRE 
-#TITLE Bach Alive[Hard]
+#GENRE dance
+#TITLE Bach Alive
 #ARTIST Beautiful Day
+#PATTERN HWAN
+#DURATION 103
 #BPM 130
 #PLAYLEVEL 11
 #RANK 3
-#STAGEFILE cover.jpg
+#STAGEFILE o2ma100.jpg
+#THUMBFILE o2ma100.bmp
 #LNTYPE 01
 
 
