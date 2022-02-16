@@ -91,9 +91,14 @@ namespace O2FS
         // Convert the BMS into OJN file.
         auto data = LoadChart(hFile);
 
+        // Calculate the number of bytes to read to avoid out of range error
+        int count = nNumberOfBytesToRead;
+        if (offset + count > data.size())
+            count = data.size() - offset;
+
         // Fill the buffer with converted OJN data at requested offset
-        memcpy(&buffer[0], &data[offset], nNumberOfBytesToRead);
-        *lpNumberOfBytesRead = nNumberOfBytesToRead;
+        memcpy(&buffer[0], &data[offset], count);
+        *lpNumberOfBytesRead = count;
 
         // Release the HANDLE lock so the HANDLE can be hooked again after this call.
         handles.erase(fileName);
