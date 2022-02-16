@@ -25,10 +25,10 @@ Custom file extension, `OJNList.dat` and `OJM` Sync support, Note Pan and Note V
 Quite amount of effort is needed to complete this hook so it can provide flexible virtual FileSystem:
 1. **`Charting` data classes / structs**  
 Current design is not final and should follow O2Jam data structure as close as possible while maintaining customizability.
-2. **Image FileSystem Implementation**  
-Hooks that customize FileSystem for Image files such as `OPI` and `OPA` files.
-3. **Synchronization Files Implementation**  
+2. **Synchronization Files Implementation**  
 Headers inside `OJNList.dat` and Samples inside `OJM` need to be match or else the game may fail to load the conversion output. This synchronization feature is possibly needed for Image files as well.
+3. **Image FileSystem Implementation**  
+Hooks that customize FileSystem for Image files such as `OPI` and `OPA` files.
 4. **Serializers and Deserializers**  
 Improvement for current Serializers and Deserializers, It also need a factory pattern or possibly other proper design that enable integration of new extension for other file formats.
 5. **`FindFirstFile` and `FindNextFile` Hook**  
