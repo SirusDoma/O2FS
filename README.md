@@ -3,7 +3,7 @@
 - **Author**: CXO2
 - **Version**: 0.7.0
 
-This program provides a customizable FileSystem that enables O2Jam Client (`OTwo.exe`) to load various file formats from various source.  
+This program implement system hooks which provides a virtual FileSystem that enables O2Jam Client (`OTwo.exe`) to load various file formats from various sources. 
 For an instance: Loading `BMS` file from Network directly.  
 
 Please note that extension is **NOT** limited to music files.
@@ -22,19 +22,19 @@ Custom file extension, `OJNList.dat` and `OJM` Sync support, Note Pan and Note V
 3. Run `O2FS.Launcher.exe` with O2Jam client standard arguments (the launcher will launch `OTwo.exe` and forward the arguments).
 
 ## Improvements ##
-Quite amount of effort is needed to complete this hook so it can provide flexible filesystem customization:
+Quite amount of effort is needed to complete this hook so it can provide flexible virtual FileSystem:
 1. **`Charting` data classes / structs**  
 Current design is not final and should follow O2Jam data structure as close as possible while maintaining customizability.
 2. **Image FileSystem Implementation**  
 Hooks that customize FileSystem for Image files such as `OPI` and `OPA` files.
-3. **Synchronization Files**  
-Headers inside `OJNList.dat` and Samples inside `OJM` need to be match or else the game may fail to load the conversion output.
+3. **Synchronization Files Implementation**  
+Headers inside `OJNList.dat` and Samples inside `OJM` need to be match or else the game may fail to load the conversion output. This synchronization feature is possibly needed for Image files as well.
 4. **Serializers and Deserializers**  
 Improvement for current Serializers and Deserializers, It also need a factory pattern or possibly other proper design that enable integration of new extension for other file formats.
 5. **`FindFirstFile` and `FindNextFile` Hook**  
 This will allows custom extension to be recognized as-is by the game.
 6. **DLL Extension**  
-Allows a third-party `DLL` file to be injected to the game with O2FS interface for dynamic custom FileSystem.
+Allows a third-party `DLL` file to be injected to the game with O2FS interface for external virtual FileSystem.
 
 ## License ##
 
